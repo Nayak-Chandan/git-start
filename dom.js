@@ -12,7 +12,7 @@
 // console.log(document.images);
 
 //GETELEMENTBTID\
-console.log(document.getElementById('header-title'));
+//console.log(document.getElementById('header-title'));
 //var headerTitle = document.getElementById('header-title');
 //var head = document.getElementById('main-header');
 //console.log(headerTitle);
@@ -23,6 +23,20 @@ console.log(document.getElementById('header-title'));
 //headerTitle.innerHTML = '<h3>Hello</h3>';//it change the item listner in to Hello because in h1 it add another h3 in h1
 //head.style.borderBottom = 'solid 3px #000';
 //GET ELEMENT BY CLASS NAME
+var items = document.getElementsByClassName('list-group-item');
+console.log(items);//items in html;
+console.log(items[1]);//item  index
+items[1].textContent = 'Hello';//change the item name
+items[1].style.fontWeight = 'bold';
+items[1].style.backgroundColor = 'green';
+//items.style.backgroundColor = '#f4f4f4';
+for(var i=0;i < items.length;i++){
+    items[i].style.fontWeight = 'bold';
+}
+for(var i=0;i < items.length;i++){
+    items[i].style.backgroundColor = '#f4f4f4';
+}
+
 
 
 
