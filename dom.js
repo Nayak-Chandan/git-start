@@ -23,22 +23,31 @@
 //headerTitle.innerHTML = '<h3>Hello</h3>';//it change the item listner in to Hello because in h1 it add another h3 in h1
 //head.style.borderBottom = 'solid 3px #000';
 //GET ELEMENT BY CLASS NAME
-var items = document.getElementsByClassName('list-group-item');
-console.log(items);//items in html;
-console.log(items[1]);//item  index
-items[1].textContent = 'Hello';//change the item name
-items[1].style.fontWeight = 'bold';
-items[1].style.backgroundColor = 'green';
+// var items = document.getElementsByClassName('list-group-item');
+// console.log(items);//items in html;
+// console.log(items[1]);//item  index
+// items[1].textContent = 'Hello';//change the item name
+// items[1].style.fontWeight = 'bold';
+// items[1].style.backgroundColor = 'green';
 //items.style.backgroundColor = '#f4f4f4';
-for(var i=0;i < items.length;i++){
-    items[i].style.fontWeight = 'bold';
-}
-for(var i=0;i < items.length;i++){
-    items[i].style.backgroundColor = '#f4f4f4';
-}
-
-
-
+//get font bold for all items
+// for(var i=0;i < items.length;i++){
+//     items[i].style.fontWeight = 'bold';
+// }
+// //get background color for all items with gray color
+// for(var i=0;i < items.length;i++){
+//     items[i].style.backgroundColor = '#f4f4f4';
+// }
+//getElementsByTagname
+var li = document.getElementsByTagName('li');
+console.log(li);// get each li;
+ console.log(li[1]);//item  index
+ li[1].textContent = 'Hello';//change the item name
+li[1].style.fontWeight = 'bold';
+ li[1].style.backgroundColor = 'green';
+ for(var i=0;i < li.length;i++){
+        li[i].style.backgroundColor = '#f4f4f4';
+     }
 
 
 
