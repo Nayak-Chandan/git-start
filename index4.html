@@ -15,16 +15,33 @@
         <input type="tel" name="phonenumber" />
         <button> Signup </button>
     </form>
+    <ul id="list-items">
+
+
+    </ul>
     <script>
         function saveToLocalStorage(event){
             event.preventDefault();
             var name = event.target.username.value;
             var email = event.target.email.value;
             var phonenumber = event.target.phonenumber.value;
-            localStorage.setItem('name',name);
-            localStorage.setItem('email',email);
-            localStorage.setItem('phonenumber', phonenumber);
-
+            // localStorage.setItem('email',name);
+            // localStorage.setItem('email',email);
+            // localStorage.setItem('email', phonenumber);
+            var obj ={
+                name,
+                email,
+                phonenumber
+            }
+            localStorage.setItem(obj.email,JSON.stringify(obj))
+            showUserOnScreen(obj);
+            
+        }
+        function  showUserOnScreen(obj) {
+            var newItem = document.getElementById('list-items');
+            var li = document.createElement('li');
+            li.textContent = obj.name +'-'+obj.email +'-'+obj.phonenumber;
+            newItem.appendChild(li);
         }
 
     </script>
