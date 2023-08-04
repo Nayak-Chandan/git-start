@@ -9,10 +9,13 @@
     <form onsubmit="saveToLocalStorage(event)">
         <label>Name</label>
         <input type="text" name="username" required  />
+        <br>
         <label>Email</label>
         <input type="email" name="email" required />
+        <br>
         <label>Phonenumber</label>
         <input type="tel" name="phonenumber" />
+        <br>
         <button> Signup </button>
     </form>
     <ul id="list-items">
@@ -38,10 +41,18 @@
             
         }
         function  showUserOnScreen(obj) {
-            var newItem = document.getElementById('list-items');
+            let newItem = document.getElementById('list-items');
             var li = document.createElement('li');
             li.textContent = obj.name +'-'+obj.email +'-'+obj.phonenumber;
             newItem.appendChild(li);
+            var deleteBtn = document.createElement('button');
+            deleteBtn.appendChild(document.createTextNode('delete'));
+            li.appendChild(deleteBtn);
+            deleteBtn.onclick=()=>{
+                console.log("hii");
+                newItem.removeChild(li);
+            }
+            localStorage.removeItem(obj.email);
         }
 
     </script>
