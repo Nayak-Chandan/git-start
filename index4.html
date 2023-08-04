@@ -3,24 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-   <link rel="stylesheet" href="index.css">
+    <title>LocalStorage</title>
 </head>
 <body>
-    <div id="mydiv" >
-        <form>
-         <label class="name"> First Name:</label>
-         <input type="text" />
-         <br>
-         <label class="name">Last Name:</label>
-         <input type="text"/>
-        <br>
-        <label class="name"> Email:</label>
-        <input type="email" />
+    <form onsubmit="saveToLocalStorage(event)">
+        <label>Name</label>
+        <input type="text" name="username" required  />
+        <label>Email</label>
+        <input type="email" name="email" required />
+        <label>Phonenumber</label>
+        <input type="tel" name="phonenumber" />
+        <button> Signup </button>
+    </form>
+    <script>
+        function saveToLocalStorage(event){
+            event.preventDefault();
+            var name = event.target.username.value;
+            var email = event.target.email.value;
+            var phonenumber = event.target.phonenumber.value;
+            localStorage.setItem('name',name);
+            localStorage.setItem('email',email);
+            localStorage.setItem('phonenumber', phonenumber);
 
-        <br>
-        <button> submit </button>
-     </form>
-    </div>
+        }
+
+    </script>
 </body>
 </html>
