@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+        <form onsubmit="saveToLocalStorage(event)">
+            <label>Choose expenseamount:</label>
+            <input type="text" name="amount" id="expenseamount"  />
+            <label>Choose description:</label>
+            <input type="text" name="description" id="expensedescription" />
+            <label for="catagory" >Choose a catagory:</label>
+            <select class="catagory" id="categorySelect">
+                <option value="fuel">fuel</option>
+                <option value="food">food</option>
+                <option value="movie">movie</option>
+                <option value="elecricity">elecricity</option>
+            </select>
+            <button> Add Expenses </button>
+        </form>
+        <ul id="expenses">
+
+        </ul>
+    <script>
+         function saveToLocalStorage(event){
+            event.preventDefault();
+            var name = event.target.amount.value;
+            //console.log(name);
+            var description = event.target.description.value;
+           // console.log(description);
+            var catagory = event.target.categorySelect.value;
+           // console.log(catagory);
+            // localStorage.setItem('description',name);
+            // localStorage.setItem('description',description);
+            // localStorage.setItem('description', catagory);
+            var obj ={
+                name,
+                description,
+                catagory
+            }
+            localStorage.setItem(obj.description,JSON.stringify(obj))
+             showUserOnScreen(obj);
+            
+         }
+         function  showUserOnScreen(obj) {
+            let newItem = document.getElementById('expenses');
+            var li = document.createElement('li');
+            li.textContent = obj.name +'-'+obj.description +'-'+obj.catagory;
+            newItem.appendChild(li);
+            var deleteBtn = document.createElement('button');
+            deleteBtn.appendChild(document.createTextNode('delete'));
+            li.appendChild(deleteBtn);
+            deleteBtn.onclick=()=>{
+                //console.log("hii");
+                //newItem.removeChild(li);
+                localStorage.removeItem(obj.description);
+                newItem.removeChild(li);
+            }
+            let editButton = document.createElement('input');
+            editButton.type = "button";
+            editButton.value = 'edit';
+            li.appendChild(editButton);
+            editButton.onclick=()=>{
+                localStorage.removeItem(obj.description);
+                newItem.removeChild(li);
+                document.getElementById('expenseamount').value = obj.name
+                document.getElementById('expensedescription').value = obj.description
+                document.getElementById('categorySelect').value = obj.catagory
+            }
+        newItem.appendChild(li);
+        }
+
+    </script>
+    
+</body>
+</html>
