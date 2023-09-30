@@ -32,6 +32,19 @@
         console.log(postonCrudcrud);
         showonUserScreen(postonCrudcrud.data);
       }
+      window.addEventListener("DOMContentLoaded", () => {
+        const data = axios
+          .get("https://crudcrud.com/api/14ba677128214c67a4441d8d633e73d1/data")
+          .then((res) => {
+            console.log(res);
+            for (let i = 0; i < res.data.length; i++) {
+              showonUserScreen(res.data[i]);
+            }
+          })
+          .catch((err) => {
+            console.log("error");
+          });
+      });
       function showonUserScreen(data) {
         const parentElem = document.getElementById("list");
         const childElem = document.createElement("li");
