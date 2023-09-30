@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form onsubmit="saveToLocalStorage(event)">
+      <label>Name</label>
+      <input type="text" name="username" required />
+      <label>Email</label>
+      <input type="email" name="email" required />
+      <label>Phonenumber</label>
+      <input type="tel" name="phonenumber" />
+      <button>Signup</button>
+    </form>
+    <ul id="list"></ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
+    <script>
+      async function saveToLocalStorage(event) {
+        event.preventDefault();
+        var name = event.target.username.value;
+        var email = event.target.email.value;
+        var phonenumber = event.target.phonenumber.value;
+
+        const userData = { name, email, phonenumber };
+        const postonCrudcrud = await axios.post(
+          "https://crudcrud.com/api/14ba677128214c67a4441d8d633e73d1/data",
+          userData
+        );
+        console.log(postonCrudcrud);
+        showonUserScreen(postonCrudcrud.data);
+      }
+      function showonUserScreen(data) {
+        const parentElem = document.getElementById("list");
+        const childElem = document.createElement("li");
+        childElem.id = data._id;
+        childElem.appendChild(
+          document.createTextNode(
+            `${data.name},${data.email},${data.phonenumber}`
+          )
+        );
+        parentElem.appendChild(childElem);
+        //console.log(childElem);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerText = "Delete";
+        childElem.appendChild(deleteBtn);
+        deleteBtn.addEventListener("click", () => {
+          parentElem.removeChild(childElem);
+          console.log("clicked deleteBtn");
+        });
+
+        const editBtn = document.createElement("button");
+        editBtn.innerText = "edit";
+        childElem.appendChild(editBtn);
+      }
+    </script>
+  </body>
+</html>
