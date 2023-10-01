@@ -8,11 +8,11 @@
   <body>
     <form onsubmit="saveToLocalStorage(event)">
       <label>Name</label>
-      <input type="text" name="username" required />
+      <input id="name" type="text" name="username" required />
       <label>Email</label>
-      <input type="email" name="email" required />
+      <input id="email" type="email" name="email" required />
       <label>Phonenumber</label>
-      <input type="tel" name="phonenumber" />
+      <input id="phonenumber" type="tel" name="phonenumber" />
       <button>Signup</button>
     </form>
     <ul id="list"></ul>
@@ -23,18 +23,29 @@
         var name = event.target.username.value;
         var email = event.target.email.value;
         var phonenumber = event.target.phonenumber.value;
-
-        const userData = { name, email, phonenumber };
-        const postonCrudcrud = await axios.post(
-          "https://crudcrud.com/api/14ba677128214c67a4441d8d633e73d1/data",
-          userData
-        );
-        console.log(postonCrudcrud);
-        showonUserScreen(postonCrudcrud.data);
+        try {
+          const userData = { name, email, phonenumber };
+          const postonCrudcrud = await axios.post(
+            "https://crudcrud.com/api/9732c467a90a4f4e9318f53b1aed36f0/data",
+            userData
+          );
+          console.log(postonCrudcrud);
+          showonUserScreen(postonCrudcrud.data);
+          const nameInput = document.getElementById("name");
+          const emailInput = document.getElementById("email");
+          const numberInput = document.getElementById("phonenumber");
+          nameInput.value = "";
+          emailInput.value = "";
+          numberInput.value = "";
+          //   console.log(postDataOnCrudCrud);
+          //   console.log(postDataOnCrudCrud.data.email);
+        } catch (error) {
+          console.log(error);
+        }
       }
       window.addEventListener("DOMContentLoaded", () => {
         const data = axios
-          .get("https://crudcrud.com/api/14ba677128214c67a4441d8d633e73d1/data")
+          .get("https://crudcrud.com/api/9732c467a90a4f4e9318f53b1aed36f0/data")
           .then((res) => {
             console.log(res);
             for (let i = 0; i < res.data.length; i++) {
@@ -59,14 +70,34 @@
         const deleteBtn = document.createElement("button");
         deleteBtn.innerText = "Delete";
         childElem.appendChild(deleteBtn);
-        deleteBtn.addEventListener("click", () => {
-          parentElem.removeChild(childElem);
-          console.log("clicked deleteBtn");
+        deleteBtn.addEventListener("click", async () => {
+          try {
+            parentElem.removeChild(childElem);
+            const deleteUser = await axios.delete(
+              `https://crudcrud.com/api/9732c467a90a4f4e9318f53b1aed36f0/data/${data._id}`
+            );
+            console.log(deleteUser);
+            let datastatus = deleteUser;
+            if (deleteUser.status == 200) {
+              alert("Deleted successfully");
+            }
+          } catch (err) {
+            console.log(err);
+          }
         });
 
         const editBtn = document.createElement("button");
         editBtn.innerText = "edit";
         childElem.appendChild(editBtn);
+        editBtn.onclick = () => {
+          parentElem.removeChild(childElem);
+          const inputName = document.getElementById("name");
+          const inputEmail = document.getElementById("email");
+          const inputPhonenumber = document.getElementById("phonenumber");
+          inputName.value = data.name;
+          inputEmail.value = data.email;
+          inputPhonenumber.value = data.phonenumber;
+        };
       }
     </script>
   </body>
